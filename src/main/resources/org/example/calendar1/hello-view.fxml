@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="703.0" style="-fx-background-color: #113366;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.calendar1.CalendarController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="688.0" style="-fx-background-color: #113366;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.calendar1.CalendarController">
    <FlowPane fx:id="calendar" layoutX="14.0" layoutY="49.0" prefHeight="284.0" prefWidth="420.0" style="-fx-background-color: #dddddd;" />
    <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="14.0" prefHeight="35.0" prefWidth="420.0" style="-fx-background-color: #888888;">
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mon" textAlignment="CENTER" wrappingWidth="60.0">
@@ -80,4 +80,5 @@
          <Font size="16.0" />
       </font>
    </Button>
+   <FlowPane fx:id="schedule" layoutX="446.0" layoutY="14.0" prefHeight="320.0" prefWidth="228.0" style="-fx-background-color: #dddddd;" />
 </AnchorPane>
