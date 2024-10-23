@@ -48,7 +48,17 @@ public class CalendarController implements Initializable {
         drawCalendar();
     }
 
+    public void backOneDay() {
+        date = date.minusDays(1);
+        calendar.getChildren().clear();
+        drawCalendar();
+    }
 
+    public void nextOneDay() {
+        date = date.plusDays(1);
+        calendar.getChildren().clear();
+        drawCalendar();
+    }
 
     private void drawCalendar() {
         year.setText(String.valueOf(date.getYear()));
@@ -57,7 +67,7 @@ public class CalendarController implements Initializable {
         double calendarWidth = calendar.getPrefWidth();
         double calendarHeight = calendar.getPrefHeight();
         int monthMaxDate = date.getMonth().maxLength();
-        int dateOffset = ZonedDateTime.of(date.getYear(), date.getMonthValue(), date.getDayOfMonth(),0,0,0,0,date.getZone()).getDayOfWeek().getValue();
+        int dateOffset = ZonedDateTime.of(date.getYear(), date.getMonthValue(), 1,0,0,0,0,date.getZone()).getDayOfWeek().getValue();
 
         if(date.getYear() % 4 != 0 && monthMaxDate == 29){
             monthMaxDate = 28;
@@ -94,5 +104,7 @@ public class CalendarController implements Initializable {
             }
         }
     }
+
+
 }
 

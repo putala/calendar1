@@ -4,68 +4,78 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #113366;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.calendar1.CalendarController">
-   <FlowPane fx:id="calendar" layoutX="20.0" layoutY="59.0" prefHeight="270.0" prefWidth="560.0" style="-fx-background-color: #cccccc;" />
-   <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="14.0" prefHeight="45.0" prefWidth="560.0" style="-fx-background-color: #888888;">
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Monday" textAlignment="CENTER" wrappingWidth="80.0">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="703.0" style="-fx-background-color: #113366;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.calendar1.CalendarController">
+   <FlowPane fx:id="calendar" layoutX="14.0" layoutY="49.0" prefHeight="284.0" prefWidth="420.0" style="-fx-background-color: #dddddd;" />
+   <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="14.0" prefHeight="35.0" prefWidth="420.0" style="-fx-background-color: #888888;">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mon" textAlignment="CENTER" wrappingWidth="60.0">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tuesday" textAlignment="CENTER" wrappingWidth="80.0">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tue" textAlignment="CENTER" wrappingWidth="60.0">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <Text layoutX="70.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wednesday" textAlignment="CENTER" wrappingWidth="80.0">
+      <Text layoutX="70.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wed" textAlignment="CENTER" wrappingWidth="60.0">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <Text layoutX="130.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Thursday" textAlignment="CENTER" wrappingWidth="80.0">
+      <Text layoutX="130.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Thu" textAlignment="CENTER" wrappingWidth="60.0">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <Text layoutX="190.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Friday" textAlignment="CENTER" wrappingWidth="80.0">
+      <Text layoutX="190.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fri" textAlignment="CENTER" wrappingWidth="60.0">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <Text layoutX="250.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Saturday" textAlignment="CENTER" wrappingWidth="80.0">
+      <Text layoutX="250.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sat" textAlignment="CENTER" wrappingWidth="60.0">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <Text layoutX="310.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sunday" textAlignment="CENTER" wrappingWidth="80.0">
+      <Text layoutX="310.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sun" textAlignment="CENTER" wrappingWidth="60.0">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
    </HBox>
-   <HBox alignment="CENTER_LEFT" layoutX="140.0" layoutY="346.0" prefHeight="38.0" prefWidth="320.0" style="-fx-background-color: #888888;">
-      <Text fx:id="day" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="CENTER" wrappingWidth="60.0">
+   <HBox alignment="CENTER_LEFT" layoutX="119.0" layoutY="350.0" prefHeight="35.0" prefWidth="189.0" style="-fx-background-color: #dddddd;">
+      <Text fx:id="day" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="CENTER" wrappingWidth="40.0">
          <font>
-            <Font size="24.0" />
+            <Font size="18.0" />
          </font>
       </Text>
-      <Text fx:id="month" strokeType="OUTSIDE" strokeWidth="0.0" text="JANUARY" textAlignment="CENTER" wrappingWidth="160.0">
+      <Text fx:id="month" strokeType="OUTSIDE" strokeWidth="0.0" text="JANUARY" textAlignment="CENTER" wrappingWidth="110.0">
          <font>
-            <Font size="24.0" />
+            <Font size="18.0" />
          </font>
       </Text>
-      <Text fx:id="year" layoutX="310.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2024" textAlignment="CENTER" wrappingWidth="80.0">
+      <Text fx:id="year" layoutX="310.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2024" textAlignment="CENTER" wrappingWidth="60.0">
          <font>
-            <Font size="24.0" />
+            <Font size="18.0" />
          </font>
       </Text>
    </HBox>
-   <Button layoutX="20.0" layoutY="347.0" mnemonicParsing="false" onAction="#backOneMonth" text="  Back  ">
+   <Button layoutX="14.0" layoutY="350.0" mnemonicParsing="false" onAction="#backOneMonth" text="&lt;&lt;">
       <font>
          <Font size="16.0" />
       </font>
    </Button>
-   <Button layoutX="507.0" layoutY="347.0" mnemonicParsing="false" onAction="#nextOneMonth" text="  Next  ">
+   <Button layoutX="390.0" layoutY="350.0" mnemonicParsing="false" onAction="#nextOneMonth" text="&gt;&gt;">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </Button>
+   <Button layoutX="71.0" layoutY="350.0" mnemonicParsing="false" onAction="#backOneDay" text="&lt;">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </Button>
+   <Button layoutX="344.0" layoutY="350.0" mnemonicParsing="false" onAction="#nextOneDay" text="&gt;">
       <font>
          <Font size="16.0" />
       </font>
