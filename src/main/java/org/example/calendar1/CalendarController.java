@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
-//import javafx.scene.layout.VBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -73,8 +73,8 @@ public class CalendarController implements Initializable {
         int monthMaxDate = date.getMonth().maxLength();
         int dateOffset = ZonedDateTime.of(date.getYear(), date.getMonthValue(), 1,0,0,0,0,date.getZone()).getDayOfWeek().getValue();
 
-//        //List of activities for a given month
-//        Map<Integer, List<CalendarActivity>> calendarActivityMap = getCalendarActivitiesMonth(date);
+        //List of activities for a given month
+        Map<Integer, List<CalendarActivity>> calendarActivityMap = getCalendarActivitiesMonth(date);
 
         if(date.getYear() % 4 != 0 && monthMaxDate == 29){
             monthMaxDate = 28;
@@ -103,10 +103,10 @@ public class CalendarController implements Initializable {
                     }
                     if (currentDate == date.getDayOfMonth()) {
                         rectangle.setStroke(Color.RED);
-//                        List<CalendarActivity> calendarActivities = calendarActivityMap.get(currentDate);
-//                        if(calendarActivities != null){
-//                            createCalendarActivity(calendarActivities, rectangleHeight, rectangleWidth, stackPane);
-//                        }
+                        List<CalendarActivity> calendarActivities = calendarActivityMap.get(currentDate);
+                        if(calendarActivities != null){
+                            createCalendarActivity(calendarActivities, rectangleHeight, rectangleWidth, stackPane);
+                        }
                     }
                     if (today.getYear() == date.getYear() && today.getMonth() == date.getMonth() && today.getDayOfMonth() == currentDate) {
                         rectangle.setFill(Color.rgb(68,136,255));
@@ -117,67 +117,63 @@ public class CalendarController implements Initializable {
         }
     }
 //
-//    private void createCalendarActivity(List<CalendarActivity> calendarActivities, double rectangleHeight, double rectangleWidth, StackPane stackPane) {
-//        VBox calendarActivityBox = new VBox();
-//        for (int k = 0; k < calendarActivities.size(); k++) {
-//            if(k >= 2) {
-//                Text moreActivities = new Text("...");
-//                calendarActivityBox.getChildren().add(moreActivities);
-//                moreActivities.setOnMouseClicked(mouseEvent -> {
-//                    //On ... click print all activities for given date
-//                    System.out.println(calendarActivities);
-//                });
-//                break;
-//            }
-//            Text text = new Text(calendarActivities.get(k).getClientName() + ", " + calendarActivities.get(k).getDate().toLocalTime());
-//            calendarActivityBox.getChildren().add(text);
-//            text.setOnMouseClicked(mouseEvent -> {
-//                //On Text clicked
-//                System.out.println(text.getText());
-//            });
-//        }
-//        calendarActivityBox.setTranslateY((rectangleHeight / 2) * 0.20);
-//        calendarActivityBox.setMaxWidth(rectangleWidth * 0.8);
-//        calendarActivityBox.setMaxHeight(rectangleHeight * 0.65);
-//        calendarActivityBox.setStyle("-fx-background-color:GRAY");
-//        stackPane.getChildren().add(calendarActivityBox);
-//    }
-//
-//    private Map<Integer, List<CalendarActivity>> createCalendarMap(List<CalendarActivity> calendarActivities) {
-//        Map<Integer, List<CalendarActivity>> calendarActivityMap = new HashMap<>();
-//
-//        for (CalendarActivity activity: calendarActivities) {
-//            int activityDate = activity.getDate().getDayOfMonth();
-//            if(!calendarActivityMap.containsKey(activityDate)){
-//                calendarActivityMap.put(activityDate, List.of(activity));
-//            } else {
-//                List<CalendarActivity> OldListByDate = calendarActivityMap.get(activityDate);
-//
-//                List<CalendarActivity> newList = new ArrayList<>(OldListByDate);
-//                newList.add(activity);
-//                calendarActivityMap.put(activityDate, newList);
-//            }
-//        }
-//        return  calendarActivityMap;
-//    }
-//
-//    private Map<Integer, List<CalendarActivity>> getCalendarActivitiesMonth(ZonedDateTime dateFocus) {
-//        List<CalendarActivity> calendarActivities = new ArrayList<>();
-//        int year = dateFocus.getYear();
-//        int month = dateFocus.getMonth().getValue();
-//
-//        Random random = new Random();
-//        for (int i = 0; i < 50; i++) {
-//            ZonedDateTime time = ZonedDateTime.of(year, month, random.nextInt(27)+1, 16,0,0,0,dateFocus.getZone());
-//            calendarActivities.add(new CalendarActivity(time, "Co", 88));
-//        }
-//
-//        return createCalendarMap(calendarActivities);
-//    }
-//
-//
+    private void createCalendarActivity(List<CalendarActivity> calendarActivities, double rectangleHeight, double rectangleWidth, StackPane stackPane) {
+        VBox calendarActivityBox = new VBox();
+        for (int k = 0; k < calendarActivities.size(); k++) {
+            if(k >= 2) {
+                Text moreActivities = new Text("...");
+                calendarActivityBox.getChildren().add(moreActivities);
+                moreActivities.setOnMouseClicked(mouseEvent -> {
+                    //On ... click print all activities for given date
+                    System.out.println(calendarActivities);
+                });
+                break;
+            }
+            Text text = new Text(calendarActivities.get(k).getClientName() + ", " + calendarActivities.get(k).getDate().toLocalTime());
+            calendarActivityBox.getChildren().add(text);
+            text.setOnMouseClicked(mouseEvent -> {
+                //On Text clicked
+                System.out.println(text.getText());
+            });
+        }
+        calendarActivityBox.setTranslateY((rectangleHeight / 2) * 0.20);
+        calendarActivityBox.setMaxWidth(rectangleWidth * 0.8);
+        calendarActivityBox.setMaxHeight(rectangleHeight * 0.65);
+        calendarActivityBox.setStyle("-fx-background-color:GRAY");
+        stackPane.getChildren().add(calendarActivityBox);
+    }
 
+    private Map<Integer, List<CalendarActivity>> createCalendarMap(List<CalendarActivity> calendarActivities) {
+        Map<Integer, List<CalendarActivity>> calendarActivityMap = new HashMap<>();
 
+        for (CalendarActivity activity: calendarActivities) {
+            int activityDate = activity.getDate().getDayOfMonth();
+            if(!calendarActivityMap.containsKey(activityDate)){
+                calendarActivityMap.put(activityDate, List.of(activity));
+            } else {
+                List<CalendarActivity> OldListByDate = calendarActivityMap.get(activityDate);
+
+                List<CalendarActivity> newList = new ArrayList<>(OldListByDate);
+                newList.add(activity);
+                calendarActivityMap.put(activityDate, newList);
+            }
+        }
+        return calendarActivityMap;
+    }
+
+    private Map<Integer, List<CalendarActivity>> getCalendarActivitiesMonth(ZonedDateTime date) {
+        List<CalendarActivity> calendarActivities = new ArrayList<>();
+        int year = date.getYear();
+        int month = date.getMonth().getValue();
+
+        Random random = new Random();
+        for (int i = 0; i < 50; i++) {
+            ZonedDateTime time = ZonedDateTime.of(year, month, random.nextInt(27)+1, 16,0,0,0,date.getZone());
+            calendarActivities.add(new CalendarActivity(time, "Co", 88));
+        }
+
+        return createCalendarMap(calendarActivities);
+    }
 
 }
 
