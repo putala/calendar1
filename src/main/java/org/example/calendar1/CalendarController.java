@@ -2,6 +2,7 @@ package org.example.calendar1;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -12,9 +13,8 @@ import java.time.ZonedDateTime;
 import java.util.*;
 
 
+
 public class CalendarController implements Initializable {
-
-
 
     ZonedDateTime date;
     ZonedDateTime today;
@@ -132,7 +132,7 @@ public class CalendarController implements Initializable {
             Rectangle rectangleL = new Rectangle();
             rectangleL.setFill(Color.GRAY);
             rectangleL.setStroke(Color.BLACK);
-            rectangleL.setWidth(140);
+            rectangleL.setWidth(60);
             rectangleL.setHeight(21);
 
             Rectangle rectangleR = new Rectangle();
@@ -141,29 +141,29 @@ public class CalendarController implements Initializable {
             rectangleR.setWidth(140);
             rectangleR.setHeight(21);
 
-            Text activityTextL = new Text(
-                    activity.getDate().toLocalTime() + "  " + activity.getClientName()
-            );
-            Text activityTextR = new Text(
-                    activity.getDate().toLocalTime() + "  " + activity.getClientName()
-            );
+            Text activityTextL = new Text(activity.getDate().toLocalTime().toString());
+            Text activityTextR = new Text(activity.getClientEvent());
+
+            // Obsługa kliknięcia na activityPaneR, aby edytować opis wydarzenia
+            activityPaneR.setOnMouseClicked(mouseEvent -> {
+                TextInputDialog dialog = new TextInputDialog(activity.getClientEvent());
+                dialog.setTitle("Edytuj wydarzenie");
+                dialog.setHeaderText("Edytuj opis wydarzenia:");
+                dialog.setContentText("Nowy opis:");
+
+                Optional<String> result = dialog.showAndWait();
+                result.ifPresent(newDescription -> {
+                    activity.setClientEvent(newDescription); // Zakładając, że istnieje setter setClientEvent
+                    activityTextR.setText(newDescription);   // Aktualizacja tekstu w interfejsie
+                    System.out.println("Zaktualizowano wydarzenie: " + newDescription);
+                });
+            });
 
             activityPaneL.getChildren().addAll(rectangleL, activityTextL);
             activityPaneR.getChildren().addAll(rectangleR, activityTextR);
-//
-//            // mouse clicked
-//            activityPaneL.setOnMouseClicked(mouseEvent -> {
-//                System.out.println("Wybrana aktywność: " + activity.getClientName());
-//                // Kod do dodatkowych działań przy kliknięciu
-//            });
-//            activityPaneR.setOnMouseClicked(mouseEvent -> {
-//                System.out.println("Wybrana aktywność: " + activity.getClientName());
-//                // Kod do dodatkowych działań przy kliknięciu
-//            });
 
             scheduleL.getChildren().add(activityPaneL);
             scheduleR.getChildren().add(activityPaneR);
-
         }
     }
 
@@ -197,10 +197,13 @@ public class CalendarController implements Initializable {
         for (int i = 0; i < monthMaxDate-1; i++) {
             for (int j = 0; j < 14; j++) {
                 ZonedDateTime time = ZonedDateTime.of(year, month, i+1, j,0,0,0,date.getZone());
-                calendarActivities.add(new CalendarActivity(time, "Spotkanie_" + (random.nextInt(9000)+999)));
+//                calendarActivities.add(new CalendarActivity(time, "..." + (random.nextInt(9000)+999)));
+                calendarActivities.add(new CalendarActivity(time, "..."));
             }
         }
         return createCalendarMap(calendarActivities);
     }
 }
+
+
 

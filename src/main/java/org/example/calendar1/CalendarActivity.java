@@ -3,13 +3,14 @@ package org.example.calendar1;
 import java.time.ZonedDateTime;
 
 public class CalendarActivity {
+    private Integer eventID;
     private ZonedDateTime date;
-    private String clientName;
-    private Integer serviceNo;
+    private String clientEvent;
 
-    public CalendarActivity(ZonedDateTime date, String clientName) {
+
+    public CalendarActivity(ZonedDateTime date, String clientEvent) {
         this.date = date;
-        this.clientName = clientName;
+        this.clientEvent = clientEvent;
     }
 
     public ZonedDateTime getDate() {
@@ -20,28 +21,28 @@ public class CalendarActivity {
         this.date = date;
     }
 
-    public String getClientName() {
-        return clientName;
+    public String getClientEvent() {
+        return clientEvent;
     }
 
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
+    public void setClientEvent(String clientName) {
+        this.clientEvent = clientName;
     }
 
-    public Integer getServiceNo() {
-        return serviceNo;
+    public Integer getEventID() {
+        return eventID;
     }
 
-    public void setServiceNo(Integer serviceNo) {
-        this.serviceNo = serviceNo;
+    public void setEventID(Integer serviceNo) {
+        this.eventID = serviceNo;
     }
 
     @Override
     public String toString() {
         return "CalenderActivity{" +
+                ", event=" + eventID +
                 "date=" + date +
-                ", clientName='" + clientName + '\'' +
-                ", serviceNo=" + serviceNo +
+                ", clientEvent='" + clientEvent + '\'' +
                 '}';
     }
 
