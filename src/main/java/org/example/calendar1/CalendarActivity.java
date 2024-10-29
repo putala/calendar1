@@ -5,6 +5,7 @@ import java.time.ZonedDateTime;
 public class CalendarActivity {
     private ZonedDateTime date;
     private String clientName;
+    private Integer serviceNo;
 
     public CalendarActivity(ZonedDateTime date, String clientName) {
         this.date = date;
@@ -27,11 +28,20 @@ public class CalendarActivity {
         this.clientName = clientName;
     }
 
+    public Integer getServiceNo() {
+        return serviceNo;
+    }
+
+    public void setServiceNo(Integer serviceNo) {
+        this.serviceNo = serviceNo;
+    }
+
     @Override
     public String toString() {
         return "CalenderActivity{" +
                 "date=" + date +
-                ", clientName='" + clientName +
+                ", clientName='" + clientName + '\'' +
+                ", serviceNo=" + serviceNo +
                 '}';
     }
 

@@ -14,11 +14,10 @@ import java.util.*;
 
 public class CalendarController implements Initializable {
 
+
+
     ZonedDateTime date;
     ZonedDateTime today;
-
-    @FXML
-    FlowPane schedule;
 
     @FXML
     private Text year;
@@ -31,6 +30,12 @@ public class CalendarController implements Initializable {
 
     @FXML
     private FlowPane calendar;
+
+    @FXML
+    private FlowPane scheduleL;
+
+    @FXML
+    private FlowPane scheduleR;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -83,8 +88,6 @@ public class CalendarController implements Initializable {
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 7; j++) {
                 StackPane stackPane = new StackPane();
-
-
                 Rectangle rectangle = new Rectangle();
                 rectangle.setFill(Color.TRANSPARENT);
                 rectangle.setStroke(Color.GRAY);
@@ -119,60 +122,50 @@ public class CalendarController implements Initializable {
 
 
     private void createCalendarSchedule(List<CalendarActivity> activities) {
-        schedule.getChildren().clear();
+        scheduleL.getChildren().clear();
+        scheduleR.getChildren().clear();
 
         for (CalendarActivity activity : activities) {
-            StackPane activityPane = new StackPane();
+            StackPane activityPaneL = new StackPane();
+            StackPane activityPaneR = new StackPane();
 
-            Rectangle rectangle = new Rectangle();
-            rectangle.setFill(Color.LIGHTGRAY);
-            rectangle.setStroke(Color.BLACK);
-            rectangle.setWidth(200);
-            rectangle.setHeight(20);
+            Rectangle rectangleL = new Rectangle();
+            rectangleL.setFill(Color.GRAY);
+            rectangleL.setStroke(Color.BLACK);
+            rectangleL.setWidth(140);
+            rectangleL.setHeight(21);
 
-            Text activityText = new Text(
+            Rectangle rectangleR = new Rectangle();
+            rectangleR.setFill(Color.LIGHTGRAY);
+            rectangleR.setStroke(Color.BLACK);
+            rectangleR.setWidth(140);
+            rectangleR.setHeight(21);
+
+            Text activityTextL = new Text(
+                    activity.getDate().toLocalTime() + "  " + activity.getClientName()
+            );
+            Text activityTextR = new Text(
                     activity.getDate().toLocalTime() + "  " + activity.getClientName()
             );
 
-            activityPane.getChildren().addAll(rectangle, activityText);
+            activityPaneL.getChildren().addAll(rectangleL, activityTextL);
+            activityPaneR.getChildren().addAll(rectangleR, activityTextR);
+//
+//            // mouse clicked
+//            activityPaneL.setOnMouseClicked(mouseEvent -> {
+//                System.out.println("Wybrana aktywność: " + activity.getClientName());
+//                // Kod do dodatkowych działań przy kliknięciu
+//            });
+//            activityPaneR.setOnMouseClicked(mouseEvent -> {
+//                System.out.println("Wybrana aktywność: " + activity.getClientName());
+//                // Kod do dodatkowych działań przy kliknięciu
+//            });
 
-            // Dodanie reakcji na kliknięcie
-            activityPane.setOnMouseClicked(mouseEvent -> {
-                System.out.println("Wybrana aktywność: " + activity.getClientName());
-                // Kod do dodatkowych działań przy kliknięciu
-            });
+            scheduleL.getChildren().add(activityPaneL);
+            scheduleR.getChildren().add(activityPaneR);
 
-            schedule.getChildren().add(activityPane);
         }
     }
-
-
-
-//    private void createCalendarActivity(List<CalendarActivity> calendarActivities, double rectangleHeight, double rectangleWidth, StackPane stackPane) {
-//        VBox calendarActivityBox = new VBox();
-//        for (int k = 0; k < calendarActivities.size(); k++) {
-//            if(k >= 2) {
-//                Text moreActivities = new Text("...");
-//                calendarActivityBox.getChildren().add(moreActivities);
-//                moreActivities.setOnMouseClicked(mouseEvent -> {
-//                    //On ... click print all activities for given date
-//                    System.out.println(calendarActivities);
-//                });
-//                break;
-//            }
-//            Text text = new Text(calendarActivities.get(k).getClientName() + ", " + calendarActivities.get(k).getDate().toLocalTime());
-//            calendarActivityBox.getChildren().add(text);
-//            text.setOnMouseClicked(mouseEvent -> {
-//                //On Text clicked
-//                System.out.println(text.getText());
-//            });
-//        }
-//        calendarActivityBox.setTranslateY((rectangleHeight / 2) * 0.20);
-//        calendarActivityBox.setMaxWidth(rectangleWidth * 0.8);
-//        calendarActivityBox.setMaxHeight(rectangleHeight * 0.65);
-//        calendarActivityBox.setStyle("-fx-background-color:GRAY");
-//        stackPane.getChildren().add(calendarActivityBox);
-//    }
 
 
     private Map<Integer, List<CalendarActivity>> createCalendarMap(List<CalendarActivity> calendarActivities) {
@@ -202,7 +195,7 @@ public class CalendarController implements Initializable {
 
         Random random = new Random();
         for (int i = 0; i < monthMaxDate-1; i++) {
-            for (int j = 0; j < 15; j++) {
+            for (int j = 0; j < 14; j++) {
                 ZonedDateTime time = ZonedDateTime.of(year, month, i+1, j,0,0,0,date.getZone());
                 calendarActivities.add(new CalendarActivity(time, "Spotkanie_" + (random.nextInt(9000)+999)));
             }
